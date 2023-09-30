@@ -4,7 +4,7 @@ import axios from 'axios';
 
 export const fetchPrograms = async (formattedDob) => {
   try {
-    const response = await axios.get('http://localhost:1337/api/programs', {
+    const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/programs`, {
       params: {
         'filters[Date][$eq]': formattedDob
       }
@@ -17,7 +17,7 @@ export const fetchPrograms = async (formattedDob) => {
 
 export const Tithes = async () => {
     try {
-      const response = await axios.get('http://localhost:1337/api/titheses');
+      const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/titheses`);
       return response.data.data;
     } catch (error) {
       throw error;
@@ -25,14 +25,14 @@ export const Tithes = async () => {
 }
 
 export const searchTithes = async (tithesNumber) => {
-  console.log("lllllll",tithesNumber)
+ 
   try {
-    const response = await axios.get('http://localhost:1337/api/titheses',{
+    const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/programs`, {
       params: {
         'filters[Tithes_Id][$eq]': tithesNumber
       }
     });
-    console.log("AAAAAAAAAAA",response.data)
+
     return response?.data?.data;
   } catch (error) {
     throw error;
@@ -41,7 +41,7 @@ export const searchTithes = async (tithesNumber) => {
 
 
 export async function insertTithes(data) {
-  const apiUrl = 'http://localhost:1337/api/payments';
+  const apiUrl = `${process.env.REACT_APP_API_BASE_URL}/api/payments`;
 
   console.log("data",data.Date)
   const requestData = {

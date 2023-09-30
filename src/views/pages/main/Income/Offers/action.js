@@ -15,30 +15,9 @@ export const fetchPrograms = async (formattedDob) => {
   }
 };
 
-export const Tithes = async () => {
-    try {
-      const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/titheses`);
-      return response.data.data;
-    } catch (error) {
-      throw error;
-    }
-}
-
-export const searchTithes = async (tithesNumber) => {
-  try {
-    const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/programs`, {
-      params: {
-        'filters[Tithes_Id][$eq]': tithesNumber
-      }
-    });
-    return response?.data?.data;
-  } catch (error) {
-    throw error;
-  }
-}
 
 
-export async function insertSeeders(data) {
+export async function insertOffers(data) {
   const apiUrl = `${process.env.REACT_APP_API_BASE_URL}/api/payments`;
 
   console.log("data",data.Date)
@@ -47,9 +26,8 @@ export async function insertSeeders(data) {
       Payment_Category: data.PaymentCategory,
       Programe_Date: data.Date,
       Program_Name: data.Programme,
-      Tithes_Name: data.PersonName,
-      Tithes_Number: data.TithesNumber,
-      Tithes_Mobile: data.PersonMobile,
+      Person_Name: data.PersonName,
+      Person_Mobile: data.PersonMobile,
       Peyment_Method:  data.PaymentMethod,
       Payment: data.Payment,
       Note: data.Note,

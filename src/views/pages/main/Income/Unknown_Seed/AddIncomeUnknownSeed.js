@@ -18,11 +18,11 @@ import DatePicker from 'rsuite/DatePicker'
 import 'rsuite/dist/rsuite.min.css'
 import { MODAL_MSGES } from 'src/common/const'
 import SuccessModal from 'src/components/Modals/SuccessModal'
-import { fetchPrograms, Tithes, searchTithes,insertTithes } from './action';
+import { fetchPrograms,addUnknownSeed } from './action';
 
 const INITIAL_VALUE = ''
 
-function AddIncomeTithes() {
+function AddIncomeSeeders() {
 
   // UseState programme Details
 
@@ -52,66 +52,7 @@ function AddIncomeTithes() {
 
 
 
-  useEffect(() => {
-    Tithes()
-      .then(data => {
-        // Handle the response data here
-        if (data.length !== 0) {
-          // Data is an array, so we can map it
-          console.log("Data", data)
-          const tithesOptions = data.map(item => ({
-            label: item.attributes.Tithes_Id,
-            value: item.attributes.Tithes_Id,
-          }));
-
-          // Update the programOptions state
-          setTithesOptions(tithesOptions);
-
-
-        } else {
-          console.error("API Response is not an array:", data);
-        }
-
-        console.log("API Response:", data);
-      })
-      .catch(error => {
-        // Handle errors here
-        console.error("API Error:", error);
-      });
-
-
-  }, [Tithes]);
-
-
-  const searchTithesName = () => {
-    searchTithes(tithesNumber.value)
-      .then(data => {
-        // Handle the response data here
-        if (data.length !== 0) {
-          // Data is an array, so we can map it
-          console.log("Data", data)
-
-          let personName = data[0].attributes.Name;
-          let personMobile = data[0].attributes.mobile || "No Contact Number";
-
-          console.log("P", personName)
-
-          setPersonName(personName);
-          setPersonMobile(personMobile)
-
-
-        } else {
-          console.error("API Response is not an array:", data);
-        }
-
-        console.log("API Response:", data);
-      })
-      .catch(error => {
-        // Handle errors here
-        console.error("API Error:", error);
-      });
-  }
-
+ 
 
   const searchProgram = () => {
     if (dob instanceof Date) {
@@ -170,7 +111,8 @@ function AddIncomeTithes() {
   
     const data = {
       Date: formattedDob,
-      PaymentCategory: 'Tithes',
+      PaymentCategory: 'Seed',
+      Add_Unknown: true,
       Programme: programName.value,
       TithesNumber: tithesNumber.value,
       PersonName: personName,
@@ -183,7 +125,7 @@ function AddIncomeTithes() {
     console.log(data);
   
     try {
-      await insertTithes(data); // Wait for the insertTithes function to complete
+      await addUnknownSeed(data); // Wait for the insertTithes function to complete
       setAllData(data)
       setLoading(true);
   
@@ -214,11 +156,11 @@ function AddIncomeTithes() {
         data={allData}
       />
       <CCardHeader style={{ display: 'flex', justifyContent: 'space-between' }}>
-        <h5>TITHES</h5>
+        <h5>Add Unknown Seed</h5>
       </CCardHeader>
       <CCardBody>
         <CRow className="mb-4">
-          <h6>Add New Tithes</h6>
+          <h6>Add New Seed</h6>
         </CRow>
 
         {/* programme Information */}
@@ -268,60 +210,31 @@ function AddIncomeTithes() {
         </CRow>
 
         {/* Tithes Person Information */}
-        <span style={{ color: 'grey', fontWeight: 'bold' }}>Tithes Information</span>
+        <span style={{ color: 'grey', fontWeight: 'bold' }}>Offer Information</span>
         <hr style={{ borderTop: '2px solid #000' }} />
-        <CRow className="mb-2">
-          <CCol>
-            <CFormLabel htmlFor="staticEmail" className="col-form-label">
-              Tithes Number
-            </CFormLabel>
-            <Select
-              type="text"
-              id="exampleFormControlInput1"
-              size="sm"
-              options={tithesOptions}
-              onChange={(tithesOptions) => setTithesNumber(tithesOptions)}
-              required
-            />
-          </CCol>
-          <CCol md={4}>
-            <CFormLabel htmlFor="staticEmail" className="col-form-label">
-              Check Tithes Name
-            </CFormLabel>
-            <CButton
-              disabled={loading}
-              color="primary"
-              style={{ width: '80%', height: "50%" }}
-              onClick={searchTithesName}
-            >
-              Submit
-            </CButton>
-          </CCol>
-        </CRow>
         <CRow className="mb-4">
           <CCol md={7}>
             <CFormLabel htmlFor="staticEmail" className="col-form-label">
-              Person Name
+              Offer Person Name
             </CFormLabel>
             <CFormInput
               type="text"
               id="exampleFormControlInput1"
               placeholder="Ex: Lakshan"
-              value={personName}
-              disabled
+              value={personName} 
+              onChange={(personName) => setPersonName(personName.target.value)}
             />
           </CCol>
           <CCol md={4}>
             <CFormLabel htmlFor="staticEmail" className="col-form-label">
-              Person Number
+            Offer Person Number
             </CFormLabel>
             <CFormInput
               type="text"
               id="exampleFormControlInput1"
               placeholder="Ex: 07........"
-              value={personMobile}
-              disabled
-
+              value={personMobile} 
+              onChange={(personMobile) => setPersonMobile(personMobile.target.value)}
             />
           </CCol>
         </CRow>
@@ -392,4 +305,4 @@ function AddIncomeTithes() {
   )
 }
 
-export default AddIncomeTithes
+export default AddIncomeSeeders

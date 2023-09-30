@@ -170,7 +170,7 @@ function AddIncomeSeeders() {
   
     const data = {
       Date: formattedDob,
-      PaymentCategory: 'Seeder',
+      PaymentCategory: 'Seed',
       Programme: programName.value,
       TithesNumber: tithesNumber.value,
       PersonName: personName,
@@ -214,11 +214,11 @@ function AddIncomeSeeders() {
         data={allData}
       />
       <CCardHeader style={{ display: 'flex', justifyContent: 'space-between' }}>
-        <h5>Seeders</h5>
+        <h5>Seed</h5>
       </CCardHeader>
       <CCardBody>
         <CRow className="mb-4">
-          <h6>Add New Seeder</h6>
+          <h6>Add New Seed</h6>
         </CRow>
 
         {/* programme Information */}
@@ -360,7 +360,7 @@ function AddIncomeSeeders() {
             <CFormLabel htmlFor="staticEmail" className="col-form-label">
               Note
             </CFormLabel>
-            <CFormInput type="text" id="exampleFormControlInput1" placeholder="Local Authority" value={note} onChange={(event) => setNote(event.target.value)} />
+            <CFormInput type="text" id="exampleFormControlInput1" placeholder="Note" value={note} onChange={(event) => setNote(event.target.value)} />
           </CCol>
         </CRow>
 

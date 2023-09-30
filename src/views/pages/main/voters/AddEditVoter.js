@@ -326,7 +326,7 @@ function AddEditVoter() {
             <CFormLabel htmlFor="staticEmail" className="col-form-label">
               Local Authority
             </CFormLabel>
-            <CFormInput type="text" id="exampleFormControlInput1" placeholder="Local Authority" />
+            <CFormInput type="text" id="exampleFormControlInput1" placeholder="Note" />
           </CCol>
           <CCol>
             <CFormLabel htmlFor="staticEmail" className="col-form-label">

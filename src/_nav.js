@@ -6,13 +6,14 @@ import {
   cilChartPie,
   cilCursor,
   cilDescription,
-  cilDrop,
   cilNotes,
   cilPencil,
   cilPeople,
   cilPuzzle,
   cilSpeedometer,
   cilStar,
+  cilBook,
+  cilDrop
 } from '@coreui/icons'
 import { CNavGroup, CNavItem, CNavTitle } from '@coreui/react'
 
@@ -24,26 +25,16 @@ const _nav = [
     icon: <CIcon icon={cilStar} customClassName="nav-icon" />,
   },
   {
-    component: CNavTitle,
-    name: 'Add Income',
-  },
-  {
     component: CNavItem,
-    name: 'Organizers',
+    name: 'Programs',
     to: '/organizers',
-    icon: <CIcon icon={cilSpeedometer} customClassName="nav-icon" />,
-  },
-  {
-    component: CNavItem,
-    name: 'Voters',
-    to: '/voters',
-    icon: <CIcon icon={cilPeople} customClassName="nav-icon" />,
+    icon: <CIcon icon={cilBook} customClassName="nav-icon" />,
   },
   {
     component: CNavGroup,
     name: 'Income',
     to: ' ',
-    icon: <CIcon icon={cilPuzzle} customClassName="nav-icon" />,
+    icon: <CIcon icon={cilDrop} customClassName="nav-icon" />,
     items: [
       {
         component: CNavItem,
@@ -52,8 +43,23 @@ const _nav = [
       },
        {
         component: CNavItem,
-        name: 'Add Seeders',
+        name: 'Add Seeds',
         to: '/income/seeder',
+      },
+      {
+        component: CNavItem,
+        name: 'Add Offering',
+        to: '/income/Offering',
+      },
+      {
+        component: CNavItem,
+        name: 'Add Unknown Tithes',
+        to: '/income/unknown/tithes',
+      },
+      {
+        component: CNavItem,
+        name: 'Add Unknown Seed',
+        to: '/income/unknown/seed',
       },
     ],
   },

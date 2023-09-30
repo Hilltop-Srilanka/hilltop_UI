@@ -14,7 +14,6 @@ import {
   CSpinner,
   CImage
 } from '@coreui/react';
-import { Pdf } from '../Tithes/tithesPdf/pdf';
 import Wallpaper from '../../../../../assets/images/react.jpg'
 
 function AddIncomePdf() {

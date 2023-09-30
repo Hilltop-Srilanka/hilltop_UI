@@ -9,6 +9,10 @@ const AddIncome = React.lazy(() => import('./views/pages/main/Income/AddIncome')
 const AddIncomePdf = React.lazy(() => import('./views/pages/main/Income/CretePdf/AddIncomePdf'))
 const AddIncomeTithes = React.lazy(() => import('./views/pages/main/Income/Tithes/AddIncomeTithes'))
 const AddIncomeSeeders = React.lazy(() => import('./views/pages/main/Income/Seeders/AddIncomeSeeders'))
+const AddIncomeOffers = React.lazy(() => import('./views/pages/main/Income/Offers/AddIncomeOffers'))
+const AddIncomeUnknownTithes = React.lazy(() => import('./views/pages/main/Income/Unknown_Tithes/AddIncomeUnknownTithes'))
+const AddIncomeUnknownSeed = React.lazy(() => import('./views/pages/main/Income/Unknown_Seed/AddIncomeUnknownSeed'))
+
 
 
 
@@ -73,6 +77,11 @@ const routes = [
   { path: '/income/tithes', name: 'Add Tithes', element:AddIncomeTithes  },
   { path: '/income/Pdf', name: 'Add Tithes', element:AddIncomePdf  },
   { path: '/income/seeder', name: 'Add Tithes', element:AddIncomeSeeders  },
+  { path: '/income/Offering', name: 'Add Tithes', element:AddIncomeOffers  },
+  { path: '/income/unknown/tithes', name: 'Add Tithes', element:AddIncomeUnknownTithes  },
+  { path: '/income/unknown/seed', name: 'Add Tithes', element:AddIncomeUnknownSeed  },
+
+
 
   { path: '/organizers/:type/:add', name: 'Organizer Configaration', element: AddEditOrginizer },
   { path: '/theme', name: 'Theme', element: Colors, exact: true },
