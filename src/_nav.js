@@ -50,6 +50,11 @@ const _nav = [
         name: 'Add Tithes',
         to: '/income/tithes',
       },
+       {
+        component: CNavItem,
+        name: 'Add Seeders',
+        to: '/income/seeder',
+      },
     ],
   },
   

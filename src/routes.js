@@ -6,7 +6,11 @@ const VotersPage = React.lazy(() => import('./views/pages/main/voters/VotersPage
 const AddEditVoter = React.lazy(() => import('./views/pages/main/voters/AddEditVoter'))
 const AddEditOrginizer = React.lazy(() => import('./views/pages/main/orginizers/AddEditOrginizer'))
 const AddIncome = React.lazy(() => import('./views/pages/main/Income/AddIncome'))
-const AddIncomeTithes = React.lazy(() => import('./views/pages/main/Income/AddIncomeTithes'))
+const AddIncomePdf = React.lazy(() => import('./views/pages/main/Income/CretePdf/AddIncomePdf'))
+const AddIncomeTithes = React.lazy(() => import('./views/pages/main/Income/Tithes/AddIncomeTithes'))
+const AddIncomeSeeders = React.lazy(() => import('./views/pages/main/Income/Seeders/AddIncomeSeeders'))
+
+
 
 
 
@@ -67,6 +71,9 @@ const routes = [
   { path: '/voters/:type/:add', name: 'Voter Configaration', element: AddEditVoter },
   { path: '/income', name: 'Income Configaration', element:AddIncome  },
   { path: '/income/tithes', name: 'Add Tithes', element:AddIncomeTithes  },
+  { path: '/income/Pdf', name: 'Add Tithes', element:AddIncomePdf  },
+  { path: '/income/seeder', name: 'Add Tithes', element:AddIncomeSeeders  },
+
   { path: '/organizers/:type/:add', name: 'Organizer Configaration', element: AddEditOrginizer },
   { path: '/theme', name: 'Theme', element: Colors, exact: true },
   { path: '/theme/colors', name: 'Colors', element: Colors },

@@ -18,11 +18,11 @@ import DatePicker from 'rsuite/DatePicker'
 import 'rsuite/dist/rsuite.min.css'
 import { MODAL_MSGES } from 'src/common/const'
 import SuccessModal from 'src/components/Modals/SuccessModal'
-import { fetchPrograms, Tithes, searchTithes,insertTithes } from './action';
+import { fetchPrograms, Tithes, searchTithes,insertSeeders } from './action';
 
 const INITIAL_VALUE = ''
 
-function AddIncomeTithes() {
+function AddIncomeSeeders() {
 
   // UseState programme Details
 
@@ -41,6 +41,8 @@ function AddIncomeTithes() {
   const [paymentMethod, setPaymentMethod] = useState([])
   const [payment, setPayment] = useState(INITIAL_VALUE)
   const [note, setNote] = useState(INITIAL_VALUE)
+
+  const [allData, setAllData] = useState(INITIAL_VALUE)
 
 
 
@@ -160,34 +162,41 @@ function AddIncomeTithes() {
     }, 1000)
   }
 
-  const addInvoice = () => {
-
+  const addInvoice = async () => {
     const year = dob.getFullYear();
     const month = String(dob.getMonth() + 1).padStart(2, '0'); // Months are zero-indexed
     const day = String(dob.getDate()).padStart(2, '0');
     const formattedDob = `${year}-${month}-${day}`;
-
+  
     const data = {
-      Date:formattedDob,
-      PaymentCategory:'Tithes',
-      Programme:programName.value,
-      TithesNumber:tithesNumber.value,
-      PersonName:personName,
-      PersonMobile:personMobile,
-      PaymentMethod:paymentMethod.value,
-      Payment:payment,
-      Note:note
+      Date: formattedDob,
+      PaymentCategory: 'Seeder',
+      Programme: programName.value,
+      TithesNumber: tithesNumber.value,
+      PersonName: personName,
+      PersonMobile: personMobile,
+      PaymentMethod: paymentMethod.value,
+      Payment: payment,
+      Note: note,
+    };
+  
+    console.log(data);
+  
+    try {
+      await insertSeeders(data); // Wait for the insertTithes function to complete
+      setAllData(data)
+      setLoading(true);
+  
+      setTimeout(() => {
+        setLoading(false);
+        setSuccessMsg(true);
+      }, 1000);
+    } catch (error) {
+      console.error('Error adding invoice:', error);
+      // Handle error if the insertTithes function fails
     }
-    console.log(data)
-    insertTithes(data)
-    
-    setLoading(true)
-    setTimeout(() => {
-      setLoading(false)
-      setSuccessMsg(true)
-    }, 1000)
-  }
-
+  };
+  
 
   function resetValues() {
 
@@ -199,16 +208,17 @@ function AddIncomeTithes() {
         open={successMsg}
         onOpen={(value) => setSuccessMsg(value)}
         title={'Successful Operation'}
-        description={MODAL_MSGES.VOTERS.ADD_SUCCESS_MSG}
-        rediretUrl={'/voters'}
+        description={MODAL_MSGES.Tithes.ADD_SUCCESS_MSG}
+        rediretUrl={'/income/Pdf'}
         addAnother={() => resetValues()}
+        data={allData}
       />
       <CCardHeader style={{ display: 'flex', justifyContent: 'space-between' }}>
-        <h5>TITHES</h5>
+        <h5>Seeders</h5>
       </CCardHeader>
       <CCardBody>
         <CRow className="mb-4">
-          <h6>Add New Tithes</h6>
+          <h6>Add New Seeder</h6>
         </CRow>
 
         {/* programme Information */}
@@ -355,10 +365,10 @@ function AddIncomeTithes() {
         </CRow>
 
 
-        <CAlert color="warning" className="d-flex align-items-center mt-3">
+        {/* <CAlert color="warning" className="d-flex align-items-center mt-3">
           <CIcon icon={cilWarning} className="flex-shrink-0 me-2" width={24} height={24} />
           <div>{alertMessage}</div>
-        </CAlert>
+        </CAlert> */}
         <CRow
           className="mt-4"
           style={{ position: 'sticky', bottom: '1rem', alignSelf: 'flex-end' }}
@@ -382,4 +392,4 @@ function AddIncomeTithes() {
   )
 }
 
-export default AddIncomeTithes
+export default AddIncomeSeeders

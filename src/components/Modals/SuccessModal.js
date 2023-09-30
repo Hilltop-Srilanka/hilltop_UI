@@ -4,8 +4,15 @@ import { CButton, CModal, CModalBody, CModalFooter, CModalHeader, CModalTitle } 
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 
-function SuccessModal({ title, description, rediretUrl, open, onOpen, addAnother }) {
-  const navigate = useNavigate()
+function SuccessModal({ title, description, rediretUrl, open, onOpen, addAnother, data }) {
+  const navigate = useNavigate();
+
+  const handleRedirect = () => {
+    // Use the rediretUrl prop to navigate to the specified URL
+    navigate(rediretUrl, {state: data});
+  };
+
+
   return (
     <CModal
       alignment="center"
@@ -34,18 +41,18 @@ function SuccessModal({ title, description, rediretUrl, open, onOpen, addAnother
         <CButton
           color="primary"
           onClick={() => {
-            addAnother()
-            onOpen(false)
+            addAnother();
+            onOpen(false);
           }}
         >
           Add Another
         </CButton>
-        <CButton  color="primary" onClick={() => navigate(rediretUrl)}>
-          Go To Carousal <CIcon icon={cilArrowRight} size='md' />
+        <CButton  color="primary" onClick={handleRedirect}>
+          Go To PDF <CIcon icon={cilArrowRight} size='md' />
         </CButton>
       </CModalFooter>
     </CModal>
-  )
+  );
 }
 
-export default SuccessModal
+export default SuccessModal;
