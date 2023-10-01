@@ -214,7 +214,7 @@ function AddIncomeSeeders() {
         <CRow className="mb-4">
           <CCol md={7}>
             <CFormLabel htmlFor="staticEmail" className="col-form-label">
-              Offer Person Name
+              Person Name
             </CFormLabel>
             <CFormInput
               type="text"
@@ -226,7 +226,7 @@ function AddIncomeSeeders() {
           </CCol>
           <CCol md={4}>
             <CFormLabel htmlFor="staticEmail" className="col-form-label">
-            Offer Person Number
+            Person Number
             </CFormLabel>
             <CFormInput
               type="text"

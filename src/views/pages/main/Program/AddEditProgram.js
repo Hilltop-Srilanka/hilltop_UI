@@ -18,7 +18,7 @@ import DatePicker from 'rsuite/DatePicker'
 import 'rsuite/dist/rsuite.min.css'
 import { MODAL_MSGES } from 'src/common/const'
 import SuccessModal from 'src/components/Modals/SuccessModal'
-import { fetchPrograms,unknownTithes } from './action';
+import { fetchPrograms } from './action';
 
 const INITIAL_VALUE = ''
 
@@ -111,8 +111,7 @@ function AddIncomeSeeders() {
   
     const data = {
       Date: formattedDob,
-      PaymentCategory: 'Tithes',
-      Add_Unknown: true,
+      PaymentCategory: 'Offering',
       Programme: programName.value,
       TithesNumber: tithesNumber.value,
       PersonName: personName,
@@ -125,7 +124,7 @@ function AddIncomeSeeders() {
     console.log(data);
   
     try {
-      await unknownTithes(data); // Wait for the insertTithes function to complete
+    //   await insertOffers(data); // Wait for the insertTithes function to complete
       setAllData(data)
       setLoading(true);
   
@@ -156,16 +155,15 @@ function AddIncomeSeeders() {
         data={allData}
       />
       <CCardHeader style={{ display: 'flex', justifyContent: 'space-between' }}>
-        <h5>Unknown Tithes</h5>
+        <h5>Program</h5>
       </CCardHeader>
       <CCardBody>
         <CRow className="mb-4">
-          <h6>Add New Tithes</h6>
+          <h6>Add New Program</h6>
         </CRow>
 
         {/* programme Information */}
 
-        <span style={{ color: 'grey', fontWeight: 'bold' }}>Programme Details</span>
         <hr style={{ borderTop: '2px solid #000' }} />
         <CRow className="mb-4">
           <CCol md={3}>
@@ -180,42 +178,10 @@ function AddIncomeSeeders() {
             />
 
           </CCol>
-          <CCol>
-            <CFormLabel htmlFor="staticEmail" className="col-form-label">
-              Check Programme
-            </CFormLabel>
-            <CButton
-              disabled={loading}
-              color="primary"
-              style={{ width: '80%', height: "43%" }}
-              onClick={searchProgram}
-            >
-              Submit
-            </CButton>
-          </CCol>
 
-          <CCol md={6}>
+          <CCol md={8}>
             <CFormLabel htmlFor="staticEmail" className="col-form-label">
               Programme Name
-            </CFormLabel>
-            <Select
-              type="text"
-              id="exampleFormControlInput1"
-              size="sm"
-              options={programOptions}
-              onChange={(programOptions) => setProgramName(programOptions)}
-            />
-
-          </CCol>
-        </CRow>
-
-        {/* Tithes Person Information */}
-        <span style={{ color: 'grey', fontWeight: 'bold' }}>Offer Information</span>
-        <hr style={{ borderTop: '2px solid #000' }} />
-        <CRow className="mb-4">
-          <CCol md={7}>
-            <CFormLabel htmlFor="staticEmail" className="col-form-label">
-              Person Name
             </CFormLabel>
             <CFormInput
               type="text"
@@ -224,27 +190,10 @@ function AddIncomeSeeders() {
               value={personName} 
               onChange={(personName) => setPersonName(personName.target.value)}
             />
+
           </CCol>
+          <CRow>
           <CCol md={4}>
-            <CFormLabel htmlFor="staticEmail" className="col-form-label">
-            Person Number
-            </CFormLabel>
-            <CFormInput
-              type="text"
-              id="exampleFormControlInput1"
-              placeholder="Ex: 07........"
-              value={personMobile} 
-              onChange={(personMobile) => setPersonMobile(personMobile.target.value)}
-            />
-          </CCol>
-        </CRow>
-
-        {/* Tithes Payment Information */}
-
-        <span style={{ color: 'grey', fontWeight: 'bold' }}>Payment Details</span>
-        <hr style={{ borderTop: '2px solid #000' }} />
-        <CRow className="mb-2">
-          <CCol>
             <CFormLabel htmlFor="staticEmail" className="col-form-label">
               Peyment Method
             </CFormLabel>
@@ -260,6 +209,16 @@ function AddIncomeSeeders() {
               ]}
               onChange={setPaymentMethod}
             ></Select>
+          </CCol>
+          </CRow>
+        </CRow>
+        <hr style={{ borderTop: '2px solid #000' }} />
+        <CRow className="mb-2">
+          <CCol>
+            <CFormLabel htmlFor="staticEmail" className="col-form-label">
+              Peyment Method
+            </CFormLabel>
+            <CFormInput type="number" id="exampleFormControlInput1" placeholder="10000" value={payment}  onChange={(event) => setPayment(event.target.value)} />
           </CCol>
           <CCol>
             <CFormLabel htmlFor="staticEmail" className="col-form-label">

@@ -16,7 +16,7 @@ const Login = React.lazy(() => import('./views/pages/login/Login'))
 const Register = React.lazy(() => import('./views/pages/register/Register'))
 const Page404 = React.lazy(() => import('./views/pages/page404/Page404'))
 const Page500 = React.lazy(() => import('./views/pages/page500/Page500'))
-const OrganizersPage = React.lazy(() => import('./views/pages/main/orginizers/OrganizersPage'))
+const ProgramPage = React.lazy(() => import('./views/pages/main/Program/programPage'))
 const VotersPage = React.lazy(() => import('./views/pages/main/voters/VotersPage'))
 const Income = React.lazy(() => import('./views/pages/main/Income/AddIncome'))
 
@@ -29,7 +29,7 @@ class App extends Component {
           <Routes>
             <Route exact path="/login" name="Login Page" element={<Login />} />
             <Route exact path="/register" name="Register Page" element={<Register />} />
-            <Route exact path="/#/organizers" name="Login Page" element={<OrganizersPage />} />
+            <Route exact path="/#/program" name="program Page" element={<ProgramPage />} />
             <Route exact path="/#/voters" name="Login Page" element={<VotersPage />} />
             <Route exact path="/#/income" name="Income Page" element={<Income />} />
             <Route exact path="/404" name="Page 404" element={<Page404 />} />

@@ -1,10 +1,8 @@
 import React from 'react'
 
 const Dashboard = React.lazy(() => import('./views/dashboard/Dashboard'))
-const OrganizersPage = React.lazy(() => import('./views/pages/main/orginizers/OrganizersPage'))
-const VotersPage = React.lazy(() => import('./views/pages/main/voters/VotersPage'))
-const AddEditVoter = React.lazy(() => import('./views/pages/main/voters/AddEditVoter'))
-const AddEditOrginizer = React.lazy(() => import('./views/pages/main/orginizers/AddEditOrginizer'))
+const ProgramPage = React.lazy(() => import('./views/pages/main/Program/programPage'))
+const AddEditProgram = React.lazy(() => import('./views/pages/main/Program/AddEditProgram'))
 const AddIncome = React.lazy(() => import('./views/pages/main/Income/AddIncome'))
 const AddIncomePdf = React.lazy(() => import('./views/pages/main/Income/CretePdf/AddIncomePdf'))
 const AddIncomeTithes = React.lazy(() => import('./views/pages/main/Income/Tithes/AddIncomeTithes'))
@@ -70,9 +68,9 @@ const Widgets = React.lazy(() => import('./views/widgets/Widgets'))
 const routes = [
   { path: '/', exact: true, name: 'Home' },
   { path: '/dashboard', name: 'Dashboard', element: Dashboard },
-  { path: '/organizers', name: 'Organizers Carousal', element: OrganizersPage },
-  { path: '/voters', name: 'Voters Carousal', element: VotersPage },
-  { path: '/voters/:type/:add', name: 'Voter Configaration', element: AddEditVoter },
+  { path: '/program', name: 'Program Carousal', element: ProgramPage },
+  { path: '/program', name: 'Program Carousal', element: ProgramPage },
+  { path: '/program/:type/:add', name: 'Program AddEdit', element: AddEditProgram },
   { path: '/income', name: 'Income Configaration', element:AddIncome  },
   { path: '/income/tithes', name: 'Add Tithes', element:AddIncomeTithes  },
   { path: '/income/Pdf', name: 'Add Tithes', element:AddIncomePdf  },
@@ -83,7 +81,6 @@ const routes = [
 
 
 
-  { path: '/organizers/:type/:add', name: 'Organizer Configaration', element: AddEditOrginizer },
   { path: '/theme', name: 'Theme', element: Colors, exact: true },
   { path: '/theme/colors', name: 'Colors', element: Colors },
   { path: '/theme/typography', name: 'Typography', element: Typography },

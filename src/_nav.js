@@ -27,7 +27,7 @@ const _nav = [
   {
     component: CNavItem,
     name: 'Programs',
-    to: '/organizers',
+    to: '/program',
     icon: <CIcon icon={cilBook} customClassName="nav-icon" />,
   },
   {
