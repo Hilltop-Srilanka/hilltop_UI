@@ -1,5 +1,5 @@
 import React, { Component, Suspense } from 'react'
-import { HashRouter, Route, Routes } from 'react-router-dom'
+import { HashRouter, Route, Routes,Navigate } from 'react-router-dom'
 import './scss/style.scss'
 
 const loading = (
@@ -35,6 +35,8 @@ class App extends Component {
             <Route exact path="/404" name="Page 404" element={<Page404 />} />
             <Route exact path="/500" name="Page 500" element={<Page500 />} />
             <Route path="*" name="Home" element={<DefaultLayout />} />
+
+            <Route path="/" element={<Navigate replace to="/login" />} />
           </Routes>
         </Suspense>
       </HashRouter>
@@ -43,3 +45,4 @@ class App extends Component {
 }
 
 export default App
+

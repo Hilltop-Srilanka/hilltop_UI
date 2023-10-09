@@ -18,7 +18,7 @@ import DatePicker from 'rsuite/DatePicker'
 import 'rsuite/dist/rsuite.min.css'
 import { MODAL_MSGES } from 'src/common/const'
 import SuccessModal from 'src/components/Modals/SuccessModal'
-import { fetchPrograms } from './action';
+import { AddPrograms } from './action';
 
 const INITIAL_VALUE = ''
 
@@ -27,20 +27,13 @@ function AddIncomeSeeders() {
   // UseState programme Details
 
   const [dob, setDob] = useState(INITIAL_VALUE);
-  const [programOptions, setProgramOptions] = useState([]);
   const [programName, setProgramName] = useState([]);
+  const [programDay, setProgramDay] = useState([])
+  const [mCount, setMCount] = useState(0)
+  const [wCount, setWCount] = useState(0)
+  const [cCount, setCCount] = useState(0)
 
-
-  // UseState Contact Information
-  const [tithesOptions, setTithesOptions] = useState([]);
-  const [tithesNumber, setTithesNumber] = useState([]);
-  const [personName, setPersonName] = useState(INITIAL_VALUE)
-  const [personMobile, setPersonMobile] = useState(INITIAL_VALUE)
-
-  //UseState Payment Information
-  const [paymentMethod, setPaymentMethod] = useState([])
-  const [payment, setPayment] = useState(INITIAL_VALUE)
-  const [note, setNote] = useState(INITIAL_VALUE)
+  
 
   const [allData, setAllData] = useState(INITIAL_VALUE)
 
@@ -53,42 +46,6 @@ function AddIncomeSeeders() {
 
 
  
-
-  const searchProgram = () => {
-    if (dob instanceof Date) {
-      const year = dob.getFullYear();
-      const month = String(dob.getMonth() + 1).padStart(2, '0'); // Months are zero-indexed
-      const day = String(dob.getDate()).padStart(2, '0');
-      const formattedDob = `${year}-${month}-${day}`;
-
-      // Make the API call using the fetchPrograms function from api.js
-      fetchPrograms(formattedDob)
-        .then(data => {
-          // Handle the response data here
-          if (Array.isArray(data) && data.length !== 0) {
-            // Data is an array, so we can map it
-            console.log("Data", data);
-            const programOptions = data.map(item => ({
-              label: item.attributes.Name,
-              value: item.attributes.Name
-            }));
-
-            // Update the programOptions state
-            setProgramOptions(programOptions);
-          } else {
-            console.error("API Response is not a valid array:", data);
-          }
-
-          console.log("API Response:", data);
-        })
-        .catch(error => {
-          // Handle errors here
-          console.error("API Error:", error);
-        });
-    } else {
-      console.error("Invalid date format");
-    }
-  };
 
 
 
@@ -103,7 +60,7 @@ function AddIncomeSeeders() {
     }, 1000)
   }
 
-  const addInvoice = async () => {
+  const addPrograms = async () => {
     const year = dob.getFullYear();
     const month = String(dob.getMonth() + 1).padStart(2, '0'); // Months are zero-indexed
     const day = String(dob.getDate()).padStart(2, '0');
@@ -111,20 +68,17 @@ function AddIncomeSeeders() {
   
     const data = {
       Date: formattedDob,
-      PaymentCategory: 'Offering',
-      Programme: programName.value,
-      TithesNumber: tithesNumber.value,
-      PersonName: personName,
-      PersonMobile: personMobile,
-      PaymentMethod: paymentMethod.value,
-      Payment: payment,
-      Note: note,
+      Programme: programName,
+      ProgramDay: programDay.value,
+      MenCount: mCount,
+      WomenCount: wCount,
+      ChildrenCount: cCount,
     };
   
     console.log(data);
   
     try {
-    //   await insertOffers(data); // Wait for the insertTithes function to complete
+      await AddPrograms(data); // Wait for the insertTithes function to complete
       setAllData(data)
       setLoading(true);
   
@@ -186,28 +140,29 @@ function AddIncomeSeeders() {
             <CFormInput
               type="text"
               id="exampleFormControlInput1"
-              placeholder="Ex: Lakshan"
-              value={personName} 
-              onChange={(personName) => setPersonName(personName.target.value)}
+              placeholder="Ex: Monday Program"
+              value={programName} 
+              onChange={(programName) => setProgramName(programName.target.value)}
             />
 
           </CCol>
           <CRow>
           <CCol md={4}>
             <CFormLabel htmlFor="staticEmail" className="col-form-label">
-              Peyment Method
+              Program Day
             </CFormLabel>
             <Select
               type="text"
               id="exampleFormControlInput1"
               size="sm"
               options={[
-                { label: 'Cash', value: 'Cash' },
-                { label: 'Card', value: 'Card' },
-                { label: 'Pastors Bank Account', value: 'Pastors Bank Account' },
-                { label: 'Church Bank Account', value: 'Church Bank Account' },
+                { label: 'Sunday', value: 'Sunday' },
+                { label: 'Wednesday', value: 'Wednesday' },
+                { label: 'Friday', value: 'Friday' },
+                { label: 'Saturday', value: 'Saturday' },
+                { label: 'Special Service', value: 'Special Service' }
               ]}
-              onChange={setPaymentMethod}
+              onChange={setProgramDay}
             ></Select>
           </CCol>
           </CRow>
@@ -216,23 +171,23 @@ function AddIncomeSeeders() {
         <CRow className="mb-2">
           <CCol>
             <CFormLabel htmlFor="staticEmail" className="col-form-label">
-              Peyment Method
+              Men Count
             </CFormLabel>
-            <CFormInput type="number" id="exampleFormControlInput1" placeholder="10000" value={payment}  onChange={(event) => setPayment(event.target.value)} />
+            <CFormInput type="number" id="exampleFormControlInput1" placeholder="100" value={mCount}  onChange={(event) => setMCount(event.target.value)} />    
           </CCol>
           <CCol>
             <CFormLabel htmlFor="staticEmail" className="col-form-label">
-              Payment (RS.)
+            Women Count
             </CFormLabel>
-            <CFormInput type="number" id="exampleFormControlInput1" placeholder="10000" value={payment}  onChange={(event) => setPayment(event.target.value)} />
+            <CFormInput type="number" id="exampleFormControlInput1" placeholder="100" value={wCount}  onChange={(event) => setWCount(event.target.value)} />
           </CCol>
         </CRow>
         <CRow className="mb-2">
           <CCol md={6}>
             <CFormLabel htmlFor="staticEmail" className="col-form-label">
-              Note
+            Children Count
             </CFormLabel>
-            <CFormInput type="text" id="exampleFormControlInput1" placeholder="Note" value={note} onChange={(event) => setNote(event.target.value)} />
+            <CFormInput type="number" id="exampleFormControlInput1" placeholder="100" value={cCount} onChange={(event) => setCCount(event.target.value)} />
           </CCol>
         </CRow>
 
@@ -250,7 +205,7 @@ function AddIncomeSeeders() {
               disabled={loading}
               color="primary"
               style={{ width: '100%' }}
-              onClick={() => addInvoice()}
+              onClick={() => addPrograms()}
             >
               Submit
             </CButton>
